@@ -1,5 +1,14 @@
 package event
 
+import "reflect"
+
+var Topics = []string{
+	reflect.TypeOf(OpenAccountEvent{}).Name(),
+	reflect.TypeOf(DepositFundEvent{}).Name(),
+	reflect.TypeOf(WithdrawFunEvent{}).Name(),
+	reflect.TypeOf(CloseAccountEvent{}).Name(),
+}
+
 type OpenAccountEvent struct {
 	ID             string
 	AccountHolder  string
