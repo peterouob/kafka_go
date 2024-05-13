@@ -17,3 +17,17 @@ consumer
 ` replace events => ../events`
 
 來新增目錄文件當作包引用，接著使用go get events即可使用
+
+## 使用kafka指令
+
+### 查看kafka topic
+    - kafka-topics --bootstrap-server=localhost:9092 --list
+        - CloseAccountEvent
+        - DepositFundEvent
+        - OpenAccountEvent
+        - WithdrawFundEvent
+
+### 查看consumer
+    - kafka-consumer-groups --bootstrap-server=localhost:9092 --list
+### 創建producer
+    - kafka-consile-producer --bootstrap-server=localhost:9092 --topic=OpenAccountEvent
