@@ -1,11 +1,11 @@
-package event
+package events
 
 import "reflect"
 
 var Topics = []string{
 	reflect.TypeOf(OpenAccountEvent{}).Name(),
 	reflect.TypeOf(DepositFundEvent{}).Name(),
-	reflect.TypeOf(WithdrawFunEvent{}).Name(),
+	reflect.TypeOf(WithdrawFundEvent{}).Name(),
 	reflect.TypeOf(CloseAccountEvent{}).Name(),
 }
 
@@ -21,8 +21,8 @@ type DepositFundEvent struct {
 	Amount float64
 }
 
-type WithdrawFunEvent struct {
-	ID string
+type WithdrawFundEvent struct {
+	ID     string
 	Amount float64
 }
 
