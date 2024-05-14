@@ -26,7 +26,7 @@ func NewAccountRepository(db *gorm.DB) AccountRepository {
 }
 
 func (obj accountRepository) Save(bankAccount BankAccount) error {
-	return obj.db.Save(bankAccount).Error
+	return obj.db.Table("bond_banks").Save(bankAccount).Error
 }
 
 func (obj accountRepository) Delete(id string) error {
@@ -34,11 +34,11 @@ func (obj accountRepository) Delete(id string) error {
 }
 
 func (obj accountRepository) FindAll() (bankAccounts []BankAccount, err error) {
-	err = obj.db.Find(&bankAccounts).Error
+	err = obj.db.Table("bond_banks").Find(&bankAccounts).Error
 	return bankAccounts, err
 }
 
 func (obj accountRepository) FindByID(id string) (bankAccount BankAccount, err error) {
-	err = obj.db.Where("id=?", id).First(&bankAccount).Error
+	err = obj.db.Table("bond_banks").Where("id=?", id).First(&bankAccount).Error
 	return bankAccount, err
 }

@@ -30,4 +30,6 @@ consumer
 ### 查看consumer
     - kafka-consumer-groups --bootstrap-server=localhost:9092 --list
 ### 創建producer
-    - kafka-consile-producer --bootstrap-server=localhost:9092 --topic=OpenAccountEvent
+    - kafka-console-producer --bootstrap-server=localhost:9092 --topic=OpenAccountEvent
+### 創建consumer
+    - kafka-console-consumer --bootstrap-server=localhost:9092 --include="CloseAccountEvent|DepositFundEvent|OpenAccountEvent|WithdrawFundEvent" --group=log

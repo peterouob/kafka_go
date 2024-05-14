@@ -22,7 +22,7 @@ func NewAccountEventHandler(accountRepo repositories.AccountRepository) EventHan
 
 func (obj accountEventHandler) Handle(topic string, eventBytes []byte) {
 	switch topic {
-	case reflect.ValueOf(events.OpenAccountEvent{}).String():
+	case reflect.TypeOf(events.OpenAccountEvent{}).Name():
 		event := &events.OpenAccountEvent{}
 		err := json.Unmarshal(eventBytes, event)
 		if err != nil {
@@ -39,9 +39,9 @@ func (obj accountEventHandler) Handle(topic string, eventBytes []byte) {
 			log.Println("cannot save the bank account : ", err)
 			return
 		}
-		log.Println(event)
+		log.Printf("[%v] %v", topic, event)
 
-	case reflect.ValueOf(events.DepositFundEvent{}).String():
+	case reflect.TypeOf(events.DepositFundEvent{}).Name():
 		event := &events.DepositFundEvent{}
 		err := json.Unmarshal(eventBytes, event)
 		if err != nil {
@@ -58,9 +58,9 @@ func (obj accountEventHandler) Handle(topic string, eventBytes []byte) {
 			log.Println("cannot save the bank account : ", err)
 			return
 		}
-		log.Println(event)
+		log.Printf("[%v] %v", topic, event)
 
-	case reflect.ValueOf(events.WithdrawFundEvent{}).String():
+	case reflect.TypeOf(events.WithdrawFundEvent{}).Name():
 		event := &events.WithdrawFundEvent{}
 		err := json.Unmarshal(eventBytes, event)
 		if err != nil {
@@ -77,9 +77,9 @@ func (obj accountEventHandler) Handle(topic string, eventBytes []byte) {
 			log.Println("cannot save the bank account : ", err)
 			return
 		}
-		log.Println(event)
+		log.Printf("[%v] %v", topic, event)
 
-	case reflect.ValueOf(events.CloseAccountEvent{}).String():
+	case reflect.TypeOf(events.CloseAccountEvent{}).Name():
 		event := &events.CloseAccountEvent{}
 		err := json.Unmarshal(eventBytes, event)
 		if err != nil {
@@ -90,8 +90,8 @@ func (obj accountEventHandler) Handle(topic string, eventBytes []byte) {
 			log.Fatalln("error to delete account : ", err)
 			return
 		}
-		log.Println(event)
+		log.Printf("[%v] %v", topic, event)
 	default:
-		log.Println("no event handler")
+		log.Println("no event handler :" + topic)
 	}
 }

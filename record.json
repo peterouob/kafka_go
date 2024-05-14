@@ -1,5 +1,6 @@
-{	"ID": "abc123",
-	"AccountHolder":"Bond",
-	"AccountType": 1,
-	"OpeningBalance":100
-}
+
+{"ID": "abc123", "AccountHolder":"Bond", "AccountType": 1, "OpeningBalance":100}
+
+{"ID": "abc123", "Amount": 500}
+
+{"ID": "abc123"}
