@@ -31,5 +31,12 @@ consumer
     - kafka-consumer-groups --bootstrap-server=localhost:9092 --list
 ### 創建producer
     - kafka-console-producer --bootstrap-server=localhost:9092 --topic=OpenAccountEvent
-### 創建consumer
+### 監聽consumer
     - kafka-console-consumer --bootstrap-server=localhost:9092 --include="CloseAccountEvent|DepositFundEvent|OpenAccountEvent|WithdrawFundEvent" --group=log
+
+### 完整使用流程
+1. 啟動docker compose
+2. 在consumer 底下 go run main.go
+3. 監聽consumer kafka-console-consumer --bootstrap-server=localhost:9092 --include="CloseAccountEvent|DepositFundEvent|OpenAccountEvent|WithdrawFundEvent" --group=log
+4. 在producer 底下 go run main.go
+5. 使用api test or curl 去測試api
