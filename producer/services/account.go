@@ -73,7 +73,7 @@ func (obj accountService) CloseAccountCommand(command commands.CloseAccountComma
 		return errors.New("bad request")
 	}
 
-	event := events.WithdrawFundEvent{
+	event := events.CloseAccountEvent{
 		ID: command.ID,
 	}
 
