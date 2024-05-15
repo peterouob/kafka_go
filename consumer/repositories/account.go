@@ -3,10 +3,10 @@ package repositories
 import "gorm.io/gorm"
 
 type BankAccount struct {
-	ID            string
-	AccountHolder string
-	AccountType   int
-	Balance       float64
+	ID            string  `json:"ID"`
+	AccountHolder string  `json:"accountHolder"`
+	AccountType   int     `json:"accountType"`
+	Balance       float64 `json:"balance"`
 }
 
 type AccountRepository interface {

@@ -12,22 +12,22 @@ var Topics = []string{
 type Event interface{}
 
 type OpenAccountEvent struct {
-	ID             string
-	AccountHolder  string
-	AccountType    int
-	OpeningBalance float64
+	ID             string  `json:"ID"`
+	AccountHolder  string  `json:"accountHolder"`
+	AccountType    int     `json:"accountType"`
+	OpeningBalance float64 `json:"openingBalance"`
 }
 
 type DepositFundEvent struct {
-	ID     string
-	Amount float64
+	ID     string  `json:"ID"`
+	Amount float64 `json:"amount"`
 }
 
 type WithdrawFundEvent struct {
-	ID     string
-	Amount float64
+	ID     string  `json:"ID"`
+	Amount float64 `json:"amount"`
 }
 
 type CloseAccountEvent struct {
-	ID string
+	ID string `json:"ID"`
 }

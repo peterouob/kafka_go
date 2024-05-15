@@ -1,19 +1,19 @@
 package commands
 
 type OpenAccountCommand struct {
-	AccountHolder  string  `json:"accountHolder,omitempty"`
-	AccountType    int     `json:"accountType,omitempty"`
-	OpeningBalance float64 `json:"openingBalance,omitempty"`
+	AccountHolder  string
+	AccountType    int
+	OpeningBalance float64
 }
 
 type DepositFundCommand struct {
-	ID     string  `json:"ID,omitempty"`
-	Amount float64 `json:"amount,omitempty"`
+	ID     string
+	Amount float64
 }
 type WithdrawFundCommand struct {
-	ID     string  `json:"ID,omitempty"`
-	Amount float64 `json:"amount,omitempty"`
+	ID     string
+	Amount float64
 }
 type CloseAccountCommand struct {
-	ID string `json:"ID,omitempty"`
+	ID string
 }

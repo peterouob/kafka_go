@@ -26,7 +26,7 @@ func (obj accountEventHandler) Handle(topic string, eventBytes []byte) {
 		event := &events.OpenAccountEvent{}
 		err := json.Unmarshal(eventBytes, event)
 		if err != nil {
-			log.Fatalln("json unmarshal error : ", err)
+			log.Println(err)
 			return
 		}
 		bankAccount := repositories.BankAccount{
@@ -35,63 +35,66 @@ func (obj accountEventHandler) Handle(topic string, eventBytes []byte) {
 			AccountType:   event.AccountType,
 			Balance:       event.OpeningBalance,
 		}
-		if err = obj.accountRepo.Save(bankAccount); err != nil {
-			log.Println("cannot save the bank account : ", err)
+		err = obj.accountRepo.Save(bankAccount)
+		if err != nil {
+			log.Println(err)
 			return
 		}
-		log.Printf("[%v] %v", topic, event)
-
+		log.Printf("[%v] %#v", topic, event)
 	case reflect.TypeOf(events.DepositFundEvent{}).Name():
 		event := &events.DepositFundEvent{}
 		err := json.Unmarshal(eventBytes, event)
 		if err != nil {
-			log.Fatalln("json unmarshal error : ", err)
+			log.Println(err)
 			return
 		}
 		bankAccount, err := obj.accountRepo.FindByID(event.ID)
 		if err != nil {
-			log.Fatalln("error to find account by id : ", err)
+			log.Println(err)
 			return
 		}
 		bankAccount.Balance += event.Amount
-		if err = obj.accountRepo.Save(bankAccount); err != nil {
-			log.Println("cannot save the bank account : ", err)
+
+		err = obj.accountRepo.Save(bankAccount)
+		if err != nil {
+			log.Println(err)
 			return
 		}
-		log.Printf("[%v] %v", topic, event)
-
+		log.Printf("[%v] %#v", topic, event)
 	case reflect.TypeOf(events.WithdrawFundEvent{}).Name():
 		event := &events.WithdrawFundEvent{}
 		err := json.Unmarshal(eventBytes, event)
 		if err != nil {
-			log.Fatalln("json unmarshal error : ", err)
+			log.Println(err)
 			return
 		}
 		bankAccount, err := obj.accountRepo.FindByID(event.ID)
 		if err != nil {
-			log.Fatalln("error to find account by id : ", err)
+			log.Println(err)
 			return
 		}
 		bankAccount.Balance -= event.Amount
-		if err = obj.accountRepo.Save(bankAccount); err != nil {
-			log.Println("cannot save the bank account : ", err)
+
+		err = obj.accountRepo.Save(bankAccount)
+		if err != nil {
+			log.Println(err)
 			return
 		}
-		log.Printf("[%v] %v", topic, event)
-
+		log.Printf("[%v] %#v", topic, event)
 	case reflect.TypeOf(events.CloseAccountEvent{}).Name():
 		event := &events.CloseAccountEvent{}
 		err := json.Unmarshal(eventBytes, event)
 		if err != nil {
-			log.Fatalln("json unmarshal error : ", err)
+			log.Println(err)
 			return
 		}
-		if err = obj.accountRepo.Delete(event.ID); err != nil {
-			log.Fatalln("error to delete account : ", err)
+		err = obj.accountRepo.Delete(event.ID)
+		if err != nil {
+			log.Println(err)
 			return
 		}
-		log.Printf("[%v] %v", topic, event)
+		log.Printf("[%v] %#v", topic, event)
 	default:
-		log.Println("no event handler :" + topic)
+		log.Println("no event handler")
 	}
 }

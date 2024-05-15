@@ -21,7 +21,7 @@ func NewEventProducer(producer sarama.SyncProducer) EventProducer {
 
 func (obj eventProducer) Produce(event events.Event) error {
 	topic := reflect.TypeOf(event).Name()
-	value, err := json.Marshal(topic)
+	value, err := json.Marshal(event)
 	if err != nil {
 		return err
 	}
